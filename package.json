@@ -1,0 +1,35 @@
+{
+  "name": "new-happy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "prisma generate",
+    "dev": "tsx watch src/server.ts",
+    "build": "prisma generate && tsc",
+    "lint": "eslint src --ext .ts --fix",
+    "test": "jest --detectOpenHandles"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/preset-env": "^7.24.4",
+    "@babel/preset-typescript": "^7.24.1",
+    "@fastify/cors": "^9.0.1",
+    "@fastify/multipart": "^8.2.0",
+    "@prisma/client": "^5.12.1",
+    "@rocketseat/eslint-config": "^2.2.2",
+    "dotenv": "^16.4.5",
+    "eslint": "^9.0.0",
+    "fastify": "^4.26.2",
+    "mongoose": "^8.3.0",
+    "prisma": "^5.12.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.5",
+    "tsx": "^4.7.2"
+  }
+}
