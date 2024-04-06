@@ -20,23 +20,17 @@ app.register(require('@fastify/static'), {
 const port = parseInt(process.env.PORT || '5000', 10)
 app.register(cors, { origin: true }) // full system open
 
-mongoose
-  .connect(
-    'mongodb+srv://lcspaiva:FmyKUhIRQ801IUqL@cluster0.rplqvhe.mongodb.net/memorie?retryWrites=true',
+try {
+  app.listen(
+    {
+      port,
+      host: '0.0.0.0',
+    },
+    () => {
+      console.log(`HTTP server running on http://localhost:${port} 🚀`)
+    },
   )
-  .then(() => {
-    console.log('Conexão com o MongoDB estabelecida com sucesso!')
-    app.listen(
-      {
-        port,
-        host: '0.0.0.0',
-      },
-      () => {
-        console.log(`HTTP server running on http://localhost:${port} 🚀`)
-      },
-    )
-  })
-  .catch((err) => {
-    console.error('Erro ao conectar ao MongoDB:', err)
-    process.exit(1)
-  })
+} catch (err) {
+  console.error('Erro ao iniciar o servidor:', err)
+  process.exit(1)
+}
