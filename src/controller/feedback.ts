@@ -5,7 +5,6 @@ import { prisma } from "../lib/prisma";
 // Esquema de validação
 const FeedbackSchema = z.object({
   name: z.string(),
-  email: z.string().email(),
   message: z.string(),
 });
 
@@ -17,7 +16,6 @@ async function CreateFeedback(req: FastifyRequest, reply: FastifyReply) {
     const feedback = await prisma.feedback.create({
       data: {
         name: feedbackData.name,
-        email: feedbackData.email,
         message: feedbackData.message,
         school: {
           connect: { id: Number(id) }
@@ -27,7 +25,7 @@ async function CreateFeedback(req: FastifyRequest, reply: FastifyReply) {
 
     return reply.status(201).send({ message: "Feedback criado com sucesso", feedback });
   } catch (error) {
-    return reply.status(400).send({ message: "Erro ao criar feedback" });
+    return reply.status(400).send({ message: "Erro ao criar feedback",error:error });
   }
 }
 

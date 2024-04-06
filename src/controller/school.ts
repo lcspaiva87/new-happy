@@ -48,7 +48,12 @@ async function DeleteSchool(req: FastifyRequest, reply: FastifyReply) {
 async function GetSchoolById(req: FastifyRequest, reply: FastifyReply) {
   try {
     const { id } = req.params as { id: string };
-    const school = await prisma.school.findMany({ where: { id: Number(id) } });
+    const school = await prisma.school.findMany({
+      include: {
+        feedback: true
+      },
+       where: { id: Number(id) } 
+      });
     if (!school) {
       return reply.status(404).send({ message: "Escola não encontrada" });
     }
