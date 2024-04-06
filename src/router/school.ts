@@ -1,10 +1,13 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify'
-import { CreateSchool } from '../controller/school'
+import { CreateSchool, DeleteSchool, GetSchoolById, ListSchoolsAll } from '../controller/school'
 
-const createSchool = new CreateSchool()
+
 
 async function schoolRoutes(fastify: FastifyInstance) {
-  fastify.post('/users', async (request: FastifyRequest, reply: FastifyReply) => {
-    // Handle the request here
-  })
+  fastify.post('/school', CreateSchool)
+  fastify.get('/school', ListSchoolsAll)
+  fastify.delete('/school', DeleteSchool)
+  fastify.get('/school:id', GetSchoolById)
 }
+
+export { schoolRoutes}

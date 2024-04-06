@@ -18,20 +18,9 @@ model School{
   latitude        Float
   longitude       Float
   about           String
-  instructions    String
-  opening_hours   String
-  open_on_weekends Boolean @default(false)
-  images          Image[]
   feedback        feedback[] 
 }
 
-
-model Image {
-  id        Int    @id @default(autoincrement())
-  path      String
-  school_id Int
-  school    School @relation(fields: [school_id], references: [id])
-}
 model feedback{
   id        Int    @id @default(autoincrement())
   name      String

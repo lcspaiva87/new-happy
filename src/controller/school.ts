@@ -9,11 +9,10 @@ async function CreateSchool(req: FastifyRequest, reply: FastifyReply) {
       latitude: z.number(),
       longitude: z.number(),
       about: z.string(),
-      instructions: z.string(),
-      opening_hours: z.string()
+
 
     })
-    const { name, latitude, longitude, about, instructions, opening_hours, } = School.parse(req.body)
+    const { name, latitude, longitude, about,  } = School.parse(req.body)
     const Coluna = await prisma.school.create(
       {
         data: {
@@ -21,8 +20,7 @@ async function CreateSchool(req: FastifyRequest, reply: FastifyReply) {
           latitude,
           longitude,
           about,
-          instructions,
-          opening_hours,
+   
         }
       })
     reply.send(Coluna).status(201).send({ message: "Escola criada com sucesso" })
@@ -35,7 +33,7 @@ async function ListSchoolsAll(req: FastifyRequest, reply: FastifyReply) {
     const schools = await prisma.school.findMany();
     return reply.status(200).send(schools);
   } catch (error) {
-    return reply.status(400).send({ message: "Erro ao listar escolas" });
+    return reply.status(400).send({ message: "Erro ao listar escolas" ,error:error});
   }
 }
 async function DeleteSchool(req: FastifyRequest, reply: FastifyReply) {

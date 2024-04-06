@@ -6,10 +6,11 @@ import cors from '@fastify/cors'
 
 import { resolve } from 'node:path'
 import mongoose from 'mongoose'
+import { schoolRoutes } from './router/school'
 
 const app = fastify()
-app.register(multipart)
 
+app.register(schoolRoutes)
 app.register(require('@fastify/static'), {
   root: resolve(__dirname, '../uploads'),
   prefix: '/uploads',
