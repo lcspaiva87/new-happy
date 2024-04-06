@@ -1,0 +1,3 @@
+GET http://localhost:3333/school
+###
+GET http://localhost:3333/school/1

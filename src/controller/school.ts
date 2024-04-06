@@ -31,7 +31,7 @@ async function CreateSchool(req: FastifyRequest, reply: FastifyReply) {
 async function ListSchoolsAll(req: FastifyRequest, reply: FastifyReply) {
   try {
     const schools = await prisma.school.findMany();
-    return reply.status(200).send(schools);
+    return reply.status(200).send({data:schools});
   } catch (error) {
     return reply.status(400).send({ message: "Erro ao listar escolas" ,error:error});
   }
@@ -48,7 +48,7 @@ async function DeleteSchool(req: FastifyRequest, reply: FastifyReply) {
 async function GetSchoolById(req: FastifyRequest, reply: FastifyReply) {
   try {
     const { id } = req.params as { id: string };
-    const school = await prisma.school.findUnique({ where: { id: Number(id) } });
+    const school = await prisma.school.findMany({ where: { id: Number(id) } });
     if (!school) {
       return reply.status(404).send({ message: "Escola não encontrada" });
     }

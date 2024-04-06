@@ -1,16 +1,17 @@
 import 'dotenv/config'
 import fastify from 'fastify'
 
-import multipart from '@fastify/multipart'
 import cors from '@fastify/cors'
 
 import { resolve } from 'node:path'
 import mongoose from 'mongoose'
 import { schoolRoutes } from './router/school'
+import { feedbackRoutes } from './router/feedback'
 
 const app = fastify()
 
 app.register(schoolRoutes)
+app.register(feedbackRoutes)
 app.register(require('@fastify/static'), {
   root: resolve(__dirname, '../uploads'),
   prefix: '/uploads',
