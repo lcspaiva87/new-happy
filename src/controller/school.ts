@@ -48,7 +48,7 @@ async function DeleteSchool(req: FastifyRequest, reply: FastifyReply) {
 async function GetSchoolById(req: FastifyRequest, reply: FastifyReply) {
   try {
     const { id } = req.params as { id: string };
-    const school = await prisma.school.findMany({
+    const school = await prisma.school.findUnique({
       include: {
         feedback: true
       },
