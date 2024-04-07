@@ -6,7 +6,7 @@ import { CreateSchool, DeleteSchool, GetSchoolById, ListSchoolsAll } from '../co
 async function schoolRoutes(fastify: FastifyInstance) {
   fastify.post('/school', CreateSchool)
   fastify.get('/school', ListSchoolsAll)
-  fastify.delete('/school', DeleteSchool)
+  fastify.delete('/school/:id', DeleteSchool)
   fastify.get('/school/:id', GetSchoolById)
 }
 
