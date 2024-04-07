@@ -39,10 +39,11 @@ async function ListSchoolsAll(req: FastifyRequest, reply: FastifyReply) {
 async function DeleteSchool(req: FastifyRequest, reply: FastifyReply) {
   try {
     const { id } = req.params as { id: string };
+    await prisma.feedback.deleteMany({ where: { school_id: Number(id) } });
     await prisma.school.delete({ where: { id: Number(id) } });
     return reply.status(200).send({ message: "Escola excluída com sucesso" });
   } catch (error) {
-    return reply.status(400).send({ message: "Erro ao excluir escola" });
+    return reply.status(400).send({ message: "Erro ao excluir escola" ,error});
   }
 }
 async function GetSchoolById(req: FastifyRequest, reply: FastifyReply) {
